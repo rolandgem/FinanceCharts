@@ -6,7 +6,7 @@ Description: PricePlot.py downloads price data from Yahoo Finance and
 generates multiple price and returns plots to help you visualize the data.
 
 Inputs: symbols_list, dt_start, dt_end, t0, t1
-Outputs: AdjustedClose.pdf, NormalizedClose.pdf, DailyReturns.pdf, ScatterPlot.pdf
+Outputs: AdjustedClose.png, NormalizedClose.png, DailyReturns.png, ScatterPlot.png
 Libraries: Requires pandas_datareader to be installed. In terminal paste "pip install pandas-datareader"
 """
 
@@ -31,14 +31,14 @@ def PricePlot():
 	# Download historical Adjusted Closing prices using Pandas downloader for Yahoo: pandas.io.data.DataReader
 	data = DataReader(symbols_list, 'yahoo', dt_start, dt_end)['Adj Close']
 
-	# Plotting Adj Closing prices with x-axis = time. Saves chart as pdf in directory.
+	# Plotting Adj Closing prices with x-axis = time. Saves chart as png in directory.
 	plt.clf()
 	plt.plot(data)
 	plt.legend(symbols_list)
 	plt.ylabel('Adjusted Close')
 	plt.xlabel('Date')
 	matplotlib.rcParams.update({'font.size': 8})
-	plt.savefig('AdjustedClose.pdf', format='pdf')
+	plt.savefig('AdjustedClose.png', format='png')
 
 	# Normalizing prices to start at 1 to visualize relative value over time.
 	data_normalized = data/data.iloc[0]
@@ -48,7 +48,7 @@ def PricePlot():
 	plt.ylabel('Normalized Close')
 	plt.xlabel('Date')
 	matplotlib.rcParams.update({'font.size': 8})
-	plt.savefig('NormalizedClose.pdf', format='pdf')
+	plt.savefig('NormalizedClose.png', format='png')
 
 	# Plotting returns over 30 days starting after t0=10 days and ending at t1=40
 	# First create dataframe data_ret which includes returns
@@ -64,7 +64,7 @@ def PricePlot():
 	plt.ylabel('Daily Returns')
 	plt.xlabel('Date')
 	matplotlib.rcParams.update({'font.size': 8})
-	plt.savefig('DailyReturns.pdf', format='pdf')
+	plt.savefig('DailyReturns.png', format='png')
 
 	# Scatter plot of two stocks AA and AAPL
 	plt.clf()
@@ -72,7 +72,7 @@ def PricePlot():
 	plt.xlabel('AA')
 	plt.ylabel('AAPL')
 	matplotlib.rcParams.update({'font.size': 8})
-	plt.savefig('ScatterPlot.pdf', format='pdf')
+	plt.savefig('ScatterPlot.png', format='png')
 
 PricePlot()
 
